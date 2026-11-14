@@ -1,0 +1,252 @@
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 14px;
+}
+
+.level-card {
+  min-height: 290px;
+  padding: 21px;
+  border: 1px solid var(--line);
+  background: linear-gradient(155deg, #102238, #0b1928 70%);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  transition: border-color .2s, transform .2s, opacity .2s;
+}
+
+.level-card:hover:not(:disabled) {
+  border-color: var(--blue);
+  transform: translateY(-3px);
+}
+
+.level-card:focus-visible,
+.match-row select:focus-visible,
+.timeline-select:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.level-card.locked {
+  cursor: not-allowed;
+  opacity: .48;
+}
+
+.level-card.complete {
+  border-color: #82e2a2;
+}
+
+.level-card-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.level-index,
+.level-status,
+.level-difficulty,
+.level-progress,
+.level-discovery small {
+  font: 9px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.level-index,
+.level-difficulty {
+  color: var(--blue);
+}
+
+.level-status {
+  color: #a5f2c5;
+}
+
+.locked .level-status {
+  color: var(--muted);
+}
+
+.level-card h3 {
+  margin: 4px 0 0;
+  font: 500 21px/1.2 var(--display);
+}
+
+.level-card p {
+  margin: 0;
+  color: #a6b6c6;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.level-discovery {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  color: #c5d3df;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.level-discovery small {
+  color: #71869b;
+}
+
+.level-progress {
+  color: #8fa4b8;
+  font-size: 8px;
+}
+
+.final-level-card {
+  background: linear-gradient(145deg, #1a3041, #0b1928 75%);
+}
+
+.final-mission {
+  padding: clamp(18px, 4vw, 32px);
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, #102238, #0b1928);
+}
+
+.final-mission-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font: 9px var(--mono);
+  letter-spacing: .1em;
+}
+
+.matching-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.match-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 9px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #0b1928;
+}
+
+.match-row span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.match-row small {
+  color: var(--blue);
+  font: 8px var(--mono);
+  letter-spacing: .1em;
+}
+
+.match-row strong {
+  font: 500 13px/1.4 var(--display);
+}
+
+.match-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.match-row select,
+.timeline-select {
+  width: 100%;
+  min-height: 39px;
+  padding: 8px 10px;
+  border: 1px solid #294258;
+  border-radius: 2px;
+  background: #102238;
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.timeline-label {
+  display: block;
+  margin: 24px 0 9px;
+  font: 500 14px var(--display);
+}
+
+.final-mission > .primary-button {
+  margin-top: 16px;
+}
+
+.final-feedback {
+  min-height: 18px;
+  margin: 12px 0 0;
+  color: var(--orange);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.final-complete {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px;
+  border: 1px solid #82e2a2;
+  background: linear-gradient(120deg, #102b27, #0b1928);
+}
+
+.complete-star {
+  color: #a5f2c5;
+  font-size: 35px;
+}
+
+.final-complete .eyebrow {
+  margin-bottom: 8px;
+}
+
+.final-complete h3 {
+  margin: 0 0 8px;
+  font: 500 clamp(20px, 3vw, 28px) var(--display);
+}
+
+.final-complete p:last-child {
+  margin: 0;
+  color: #a6b6c6;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (max-width: 850px) {
+  .matching-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .level-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .level-card {
+    min-height: 255px;
+  }
+
+  .final-mission-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .match-choices {
+    grid-template-columns: 1fr;
+  }
+
+  .final-complete {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px;
+  }
+}

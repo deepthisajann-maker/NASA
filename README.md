@@ -14,7 +14,19 @@ Then open <http://localhost:8000>.
 
 ## Play online
 
-Visit <https://deepthisajann-maker.github.io/NASA/>. GitHub Actions publishes `index.html`, `game.js`, and `style.css` whenever a commit reaches `main`.
+Visit <https://deepthisajann-maker.github.io/NASA/>. GitHub Actions publishes the game files whenever a commit reaches `main`.
+
+## Campaign
+
+Levels unlock in order. Find every artifact and answer its mission check to complete a field level:
+
+1. **The Silent Moon** — Apollo hardware, the Lunar Roving Vehicle, and lunar experiments.
+2. **The Red Planet's Forgotten Explorers** — Spirit, Opportunity, and Sojourner.
+3. **Beyond the Solar System** — Voyager 1 and Voyager 2.
+4. **The Forgotten Instruments** — the Apollo 11 retroreflector and Sojourner's APXS instrument.
+5. **The Final Archive** — identify artifacts, match them to missions, and reconstruct the exploration timeline.
+
+Progress is stored in this browser using `localStorage`.
 
 ## Controls
 
@@ -28,7 +40,7 @@ Progress is stored in this browser using `localStorage`.
 ## Project files
 
 - `index.html` — screens, navigation, field HUD, and archive
-- `style.css` — responsive visual design
+- `style.css` and `levels.css` — responsive visual design and level progression
 - `game.js` — canvas exploration, mission records, quizzes, and local saves
 
 ## Accuracy notes
@@ -37,9 +49,9 @@ This prototype uses stylized scenes rather than claiming to show exact landing-s
 
 ## Quick test checklist
 
-1. Start the game and open each destination.
+1. Start the game and complete each level in order.
 2. Move toward each glowing artifact marker and investigate it.
 3. Confirm each entry shows its mission, status, historical context, and science legacy.
 4. Answer each quiz; correct answers award 25 points, and each first discovery awards 100 points.
-5. Open the archive, revisit an unlocked entry, and refresh the browser to confirm progress persists.
-6. Test pause/resume, Escape, keyboard controls, and a narrow/mobile viewport.
+5. Complete the final artifact matches and timeline to restore the archive.
+6. Refresh the browser to confirm progress persists; test pause/resume, Escape, and a narrow/mobile viewport.

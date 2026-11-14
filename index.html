@@ -7,6 +7,7 @@
   <meta name="description" content="Explore historic NASA missions in a small, playable space archaeology adventure.">
   <title>Echoes of Exploration — Space Archaeologist</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="levels.css">
   <script src="game.js" defer></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
           <button class="primary-button" id="start-button">Begin expedition <span aria-hidden="true">↗</span></button>
           <button class="text-button" data-screen="instructions">How to play <span aria-hidden="true">→</span></button>
         </div>
-        <div class="hero-stats"><span><strong id="home-discoveries">0</strong> artifacts logged</span><span class="stat-divider"></span><span>3 destinations</span></div>
+        <div class="hero-stats"><span><strong id="home-discoveries">0</strong> artifacts logged</span><span class="stat-divider"></span><span><strong id="home-level-count">0</strong> / 5 levels complete</span></div>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
@@ -40,11 +41,43 @@
     </section>
 
     <section id="map-screen" class="screen content-screen hidden" aria-labelledby="map-title">
-      <div class="section-heading"><p class="eyebrow">SELECT YOUR DESTINATION</p><h2 id="map-title">Choose a field site</h2><p>Each stop holds a different chapter of exploration. Pick a destination to begin looking.</p></div>
-      <div class="destination-grid">
-        <button class="destination-card moon-card" data-destination="moon"><span class="destination-index">01 / THE MOON</span><span class="destination-planet moon-orb"></span><span class="destination-text"><strong>The Silent Moon</strong><small>Apollo hardware · 2 artifacts</small></span><span class="card-arrow">↗</span></button>
-        <button class="destination-card mars-card" data-destination="mars"><span class="destination-index">02 / MARS</span><span class="destination-planet mars-orb"></span><span class="destination-text"><strong>Red Planet Relics</strong><small>Mars rovers · 3 artifacts</small></span><span class="card-arrow">↗</span></button>
-        <button class="destination-card deep-card" data-destination="deep"><span class="destination-index">03 / DEEP SPACE</span><span class="destination-planet deep-orb">✦</span><span class="destination-text"><strong>The Long Journey</strong><small>Interstellar probe · 1 artifact</small></span><span class="card-arrow">↗</span></button>
+      <div class="section-heading"><p class="eyebrow">ARCHAEOLOGIST'S FIELD GUIDE // FIVE LEVELS</p><h2 id="map-title">Choose your next expedition</h2><p>Investigate each site, log its hardware, and piece together the science. Complete a level to unlock the next chapter.</p></div>
+      <div class="level-grid" id="level-grid">
+        <button class="level-card" data-level="1">
+          <span class="level-card-top"><span class="level-index">LEVEL 01</span><span class="level-status" data-level-status>READY</span></span>
+          <h3>The Silent Moon</h3><span class="level-difficulty">Beginner</span>
+          <p>Explore the lunar surface and find Apollo equipment, experiments, and a lunar rover.</p>
+          <span class="level-discovery"><small>MAIN DISCOVERY</small><span>Apollo descent stages, Apollo 15 rover, and lunar experiments.</span></span>
+          <span class="level-progress" data-level-progress>0 / 3 records</span>
+        </button>
+        <button class="level-card locked" data-level="2" disabled>
+          <span class="level-card-top"><span class="level-index">LEVEL 02</span><span class="level-status" data-level-status>LOCKED</span></span>
+          <h3>The Red Planet's Forgotten Explorers</h3><span class="level-difficulty">Beginner–Intermediate</span>
+          <p>Investigate the remains of Mars rovers and their landing missions.</p>
+          <span class="level-discovery"><small>MAIN DISCOVERY</small><span>Spirit, Opportunity, Sojourner, and Pathfinder's science.</span></span>
+          <span class="level-progress" data-level-progress>0 / 3 records</span>
+        </button>
+        <button class="level-card locked" data-level="3" disabled>
+          <span class="level-card-top"><span class="level-index">LEVEL 03</span><span class="level-status" data-level-status>LOCKED</span></span>
+          <h3>Beyond the Solar System</h3><span class="level-difficulty">Intermediate</span>
+          <p>Follow two far-traveling probes beyond the planets and into interstellar space.</p>
+          <span class="level-discovery"><small>MAIN DISCOVERY</small><span>Voyager 1 and Voyager 2.</span></span>
+          <span class="level-progress" data-level-progress>0 / 2 records</span>
+        </button>
+        <button class="level-card locked" data-level="4" disabled>
+          <span class="level-card-top"><span class="level-index">LEVEL 04</span><span class="level-status" data-level-status>LOCKED</span></span>
+          <h3>The Forgotten Instruments</h3><span class="level-difficulty">Intermediate</span>
+          <p>Look beyond the spacecraft to the instruments that measured worlds and changed what we know.</p>
+          <span class="level-discovery"><small>MAIN DISCOVERY</small><span>Scientific payloads and their contributions.</span></span>
+          <span class="level-progress" data-level-progress>0 / 2 records</span>
+        </button>
+        <button class="level-card locked final-level-card" data-level="5" disabled>
+          <span class="level-card-top"><span class="level-index">LEVEL 05</span><span class="level-status" data-level-status>LOCKED</span></span>
+          <h3>The Final Archive</h3><span class="level-difficulty">Final mission</span>
+          <p>Identify the artifacts, match them to their missions, and reconstruct the history of NASA exploration.</p>
+          <span class="level-discovery"><small>FINAL OBJECTIVE</small><span>Restore the NASA Lost Hardware Archive.</span></span>
+          <span class="level-progress" data-level-progress>Complete levels 1–4 to unlock</span>
+        </button>
       </div>
       <button class="back-link" data-screen="home">← Back to home</button>
     </section>
@@ -60,7 +93,7 @@
         </div>
         <aside class="field-sidebar">
           <div class="sidebar-label">CURRENT OBJECTIVE</div><h3 id="objective-title">Find the traces</h3><p id="objective-copy">Move through the field site and approach a marked artifact. Press E to investigate.</p>
-          <div class="progress-row"><span>FIELD PROGRESS</span><span id="field-progress">0 / 2</span></div><div class="progress-track"><span id="progress-fill"></span></div>
+          <div class="progress-row"><span>FIELD PROGRESS</span><span id="field-progress">0 / 3</span></div><div class="progress-track"><span id="progress-fill"></span></div>
           <div class="nearby-box"><span class="signal-icon">⌁</span><div><b id="nearby-title">Scanning for signals…</b><small id="nearby-copy">Explore the site to find an artifact.</small></div></div>
           <button class="primary-button investigate-button" id="investigate-button" disabled>Investigate artifact <span>↗</span></button>
           <div class="field-score"><span>ARCHIVE POINTS</span><strong id="score">000</strong></div>
@@ -71,20 +104,42 @@
 
     <section id="archive-screen" class="screen content-screen hidden" aria-labelledby="archive-title">
       <div class="section-heading"><p class="eyebrow">YOUR FIELD NOTES</p><h2 id="archive-title">Lost hardware archive</h2><p>Every artifact has a story. Revisit what you have found and track your expedition progress.</p></div>
-      <div class="archive-summary"><div><strong id="archive-count">0</strong><span> / 6 artifacts discovered</span></div><div class="archive-total"><span>ARCHIVE POINTS</span><b id="archive-score">000</b></div></div>
+      <div class="archive-summary"><div><strong id="archive-count">0</strong><span> / 10 artifacts discovered</span></div><div class="archive-total"><span>ARCHIVE POINTS</span><b id="archive-score">000</b></div></div>
       <div id="archive-grid" class="archive-grid"></div>
       <button class="back-link" data-screen="map">← Continue exploring</button>
     </section>
 
     <section id="instructions-screen" class="screen content-screen hidden" aria-labelledby="instructions-title">
       <div class="section-heading"><p class="eyebrow">FIELD MANUAL</p><h2 id="instructions-title">How to explore</h2><p>Look closely. The quietest places can tell the biggest stories.</p></div>
-      <div class="instruction-grid"><article><span>01</span><h3>Choose a site</h3><p>Travel to the Moon, Mars, or deep space from the destination map.</p></article><article><span>02</span><h3>Follow the signal</h3><p>Move with WASD or the arrow keys. Walk close to a glowing marker to identify an artifact.</p></article><article><span>03</span><h3>Log the history</h3><p>Press E or use the investigate button to read the mission record and answer a short question.</p></article></div>
+      <div class="instruction-grid"><article><span>01</span><h3>Choose a level</h3><p>Begin with the Moon, then unlock Mars, deep space, and the forgotten instruments.</p></article><article><span>02</span><h3>Follow the signal</h3><p>Move with WASD or the arrow keys. Walk close to a glowing marker, investigate the hardware, and answer its mission question.</p></article><article><span>03</span><h3>Restore the archive</h3><p>Complete each field level to unlock the final mission: match artifacts to missions and put exploration milestones in order.</p></article></div>
       <div class="controls-note"><b>CONTROLS</b><span><kbd>W A S D</kbd> or <kbd>↑ ↓ ← →</kbd> move</span><span><kbd>E</kbd> investigate nearby</span><span><kbd>ESC</kbd> pause / resume</span></div>
       <button class="primary-button" id="manual-start">Ready to explore <span>↗</span></button>
     </section>
+
+    <section id="final-screen" class="screen content-screen hidden" aria-labelledby="final-title">
+      <div class="section-heading"><p class="eyebrow">LEVEL 05 // FINAL MISSION</p><h2 id="final-title">Reconstruct the NASA archive</h2><p>Use your recovered field notes to match each artifact to its mission, then place the milestones in the correct order.</p></div>
+      <div class="final-mission" id="final-mission">
+        <div class="final-mission-heading"><span class="sidebar-label">ARCHIVE RECONSTRUCTION</span><span>10 ARTIFACTS · 1 HISTORY</span></div>
+        <div class="matching-grid" id="matching-grid"></div>
+        <label class="timeline-label" for="timeline-answer">Reconstruct the timeline — which sequence is earliest to latest?</label>
+        <select id="timeline-answer" class="timeline-select">
+          <option value="">Choose a timeline sequence…</option>
+          <option value="wrong-a">Voyager enters interstellar space → Apollo 11 lands → Sojourner explores Mars → Voyager launches</option>
+          <option value="correct">Apollo 11 lands → Apollo 15 explores with a rover → Voyager launches → Sojourner reaches Mars → Spirit and Opportunity land → Voyager 1 enters interstellar space</option>
+          <option value="wrong-b">Sojourner reaches Mars → Apollo 15 explores with a rover → Apollo 11 lands → Spirit and Opportunity land → Voyager launches</option>
+        </select>
+        <button class="primary-button" id="submit-final">Reconstruct the archive <span>↗</span></button>
+        <p id="final-feedback" class="final-feedback" role="status" aria-live="polite"></p>
+      </div>
+      <div class="final-complete hidden" id="final-complete" role="status" aria-live="polite">
+        <span class="complete-star" aria-hidden="true">✦</span>
+        <div><p class="eyebrow">ARCHIVE RESTORED</p><h3>NASA's lost hardware has a history again.</h3><p>You matched the artifacts, reconstructed the timeline, and recovered the science behind the missions. The explorers' stories are part of the archive now.</p></div>
+      </div>
+      <button class="back-link" data-screen="map">← Return to level map</button>
+    </section>
   </main>
 
-  <footer><span>AN EDUCATIONAL SPACE ARCHAEOLOGY GAME</span><span>Built for curious explorers <b>✦</b></span></footer>
+  <footer><span>AN EDUCATIONAL SPACE ARCHAEOLOGY GAME</span><span>FIVE LEVELS · ONE ARCHIVE <b>✦</b></span></footer>
 
   <div id="artifact-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="artifact-title"><div class="modal-card"><button class="modal-close" data-close-modal aria-label="Close">×</button><p class="eyebrow" id="modal-kicker">ARCHIVE ENTRY / NEW DISCOVERY</p><div class="modal-art" id="modal-art" aria-hidden="true">✦</div><div class="modal-content"><h2 id="artifact-title"></h2><p class="modal-mission" id="artifact-mission"></p><div class="artifact-facts"><div><small>MISSION ERA</small><b id="artifact-era"></b></div><div><small>STATUS</small><b id="artifact-status"></b></div></div><h3>Why it matters</h3><p id="artifact-story"></p><p class="artifact-discovery"><b>SCIENTIFIC LEGACY</b><br><span id="artifact-discovery-text"></span></p><div id="quiz-area" class="quiz-area"><p class="quiz-question" id="quiz-question"></p><div id="quiz-options" class="quiz-options"></div><p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p></div><button id="artifact-done" class="primary-button modal-done">Continue exploring <span>→</span></button></div></div></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
