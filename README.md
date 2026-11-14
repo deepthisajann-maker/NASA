@@ -14,7 +14,7 @@ Then open <http://localhost:8000>.
 
 ## Play online
 
-Visit <https://deepthisajann-maker.github.io/NASA/>. GitHub Pages deploys the site from `main` whenever the game is updated.
+Visit <https://deepthisajann-maker.github.io/NASA/>. GitHub Actions publishes `index.html`, `game.js`, and `style.css` whenever a commit reaches `main`.
 
 ## Controls
 
