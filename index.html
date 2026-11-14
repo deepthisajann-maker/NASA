@@ -1,103 +1,92 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#08111f">
-    <meta name="description" content="Become a space archaeologist, investigate NASA hardware across the solar system, and restore the Lost Hardware Archive.">
-    <title>NASA Lost Hardware Archive — Space Archaeologist</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="game.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#explorers">Skip to explorers</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Explore historic NASA missions in a small, playable space archaeology adventure.">
+  <title>Echoes of Exploration — Space Archaeologist</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Echoes of Exploration home"><span class="brand-mark" aria-hidden="true">✦</span> ECHOES <span class="brand-muted">/ EXPLORATION</span></a>
+    <nav aria-label="Main navigation">
+      <button class="nav-button" data-screen="home">Home</button>
+      <button class="nav-button" data-screen="archive">Archive <span id="nav-count" class="count">0</span></button>
+    </nav>
+  </header>
 
-    <header class="site-header">
-      <a class="brand" href="#" aria-label="NASA Lost Hardware Archive home">
-        <span class="brand-mark" aria-hidden="true">✦</span>
-        <span>LOST HARDWARE ARCHIVE <span class="brand-divider">/</span> NASA</span>
-      </a>
-      <a class="header-link" href="#about">ARCHIVE BRIEF <span aria-hidden="true">↗</span></a>
-    </header>
-
-    <main>
-      <section class="hero" aria-labelledby="page-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> SPACE ARCHAEOLOGIST · RECOVERY MISSION 01</p>
-          <h1 id="page-title">The archive is<br>missing <em>pieces.</em></h1>
-          <p class="hero-intro">You are a young space archaeologist. A damaged NASA archive has lost its mission records. Travel to the Moon, Mars, and deep space, investigate forgotten hardware, and piece together the story—and science—behind every mission.</p>
-          <a class="primary-link" href="#explorers">Begin the recovery <span aria-hidden="true">↓</span></a>
+  <main>
+    <section id="home-screen" class="screen hero-screen" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> FIELD ARCHIVE // MISSION 01</p>
+        <h1 id="hero-title">Some journeys<br>leave <em>traces.</em></h1>
+        <p class="hero-description">Become a space archaeologist. Explore the Moon, Mars, and beyond to uncover the hardware and discoveries behind humanity’s greatest missions.</p>
+        <div class="hero-actions">
+          <button class="primary-button" id="start-button">Begin expedition <span aria-hidden="true">↗</span></button>
+          <button class="text-button" data-screen="instructions">How to play <span aria-hidden="true">→</span></button>
         </div>
-        <div class="orbit-art" aria-hidden="true">
-          <div class="orbit orbit-one"></div>
-          <div class="orbit orbit-two"></div>
-          <div class="orbit orbit-three"></div>
-          <div class="planet"></div>
-          <div class="orbit-moon"></div>
-          <div class="orbit-satellite">✦</div>
-          <span class="orbit-label label-one">MOON</span>
-          <span class="orbit-label label-two">MARS</span>
-        </div>
-        <div class="hero-footer">
-          <span>FOUR MISSING RECORDS</span>
-          <span class="footer-line"></span>
-          <span>THREE DESTINATIONS</span>
-          <span class="footer-line"></span>
-          <span>ONE ARCHIVE TO RESTORE</span>
-        </div>
-      </section>
+        <div class="hero-stats"><span><strong id="home-discoveries">0</strong> artifacts logged</span><span class="stat-divider"></span><span>3 destinations</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="planet planet-moon"></div><div class="planet planet-mars"></div>
+        <div class="planet planet-blue"></div><div class="hero-star star-a">✦</div><div class="hero-star star-b">·</div><div class="hero-star star-c">✧</div>
+        <div class="hero-caption"><span>FIELD NOTES</span><b>THE SOLAR SYSTEM IS A MUSEUM</b></div>
+      </div>
+      <div class="scroll-hint">A HUMAN HISTORY, WRITTEN IN THE STARS <span>↓</span></div>
+    </section>
 
-      <section class="explorer-section" id="explorers" aria-labelledby="explorers-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">ARCHIVE RECOVERY <span class="section-number">01 — 04</span></p>
-            <h2 id="explorers-title">Where will you investigate?</h2>
-          </div>
-          <div class="progress-panel" aria-live="polite">
-            <span class="progress-label">MISSION FILES RESTORED</span>
-            <span class="progress-count"><span id="notes-count">0</span><span class="progress-total"> / 4</span></span>
-            <div class="progress-track" role="progressbar" aria-label="Archive records restored" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
-              <span class="progress-fill"></span>
-            </div>
-          </div>
+    <section id="map-screen" class="screen content-screen hidden" aria-labelledby="map-title">
+      <div class="section-heading"><p class="eyebrow">SELECT YOUR DESTINATION</p><h2 id="map-title">Choose a field site</h2><p>Each stop holds a different chapter of exploration. Pick a destination to begin looking.</p></div>
+      <div class="destination-grid">
+        <button class="destination-card moon-card" data-destination="moon"><span class="destination-index">01 / THE MOON</span><span class="destination-planet moon-orb"></span><span class="destination-text"><strong>The Silent Moon</strong><small>Apollo hardware · 2 artifacts</small></span><span class="card-arrow">↗</span></button>
+        <button class="destination-card mars-card" data-destination="mars"><span class="destination-index">02 / MARS</span><span class="destination-planet mars-orb"></span><span class="destination-text"><strong>Red Planet Relics</strong><small>Mars rovers · 3 artifacts</small></span><span class="card-arrow">↗</span></button>
+        <button class="destination-card deep-card" data-destination="deep"><span class="destination-index">03 / DEEP SPACE</span><span class="destination-planet deep-orb">✦</span><span class="destination-text"><strong>The Long Journey</strong><small>Interstellar probe · 1 artifact</small></span><span class="card-arrow">↗</span></button>
+      </div>
+      <button class="back-link" data-screen="home">← Back to home</button>
+    </section>
+
+    <section id="explore-screen" class="screen exploration-screen hidden" aria-label="Exploration field">
+      <div class="explore-toolbar"><button class="back-link" data-screen="map">← Destinations</button><div class="location-label"><span class="live-dot"></span><span id="location-name">THE SILENT MOON</span></div><button class="small-button" id="pause-button">Ⅱ <span>Pause</span></button></div>
+      <div class="game-layout">
+        <div class="canvas-wrap">
+          <canvas id="game-canvas" width="960" height="540" aria-label="Explore the landscape with arrow keys or WASD"></canvas>
+          <div class="canvas-topline"><span id="scene-subtitle">LUNAR FIELD SITE // 001</span><span>FIELD SCAN ACTIVE</span></div>
+          <div class="canvas-bottomline"><span>MOVE <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span><span>INVESTIGATE <kbd>E</kbd></span></div>
+          <div id="paused-overlay" class="paused-overlay hidden"><strong>EXPEDITION PAUSED</strong><button class="primary-button" id="resume-button">Resume</button></div>
         </div>
+        <aside class="field-sidebar">
+          <div class="sidebar-label">CURRENT OBJECTIVE</div><h3 id="objective-title">Find the traces</h3><p id="objective-copy">Move through the field site and approach a marked artifact. Press E to investigate.</p>
+          <div class="progress-row"><span>FIELD PROGRESS</span><span id="field-progress">0 / 2</span></div><div class="progress-track"><span id="progress-fill"></span></div>
+          <div class="nearby-box"><span class="signal-icon">⌁</span><div><b id="nearby-title">Scanning for signals…</b><small id="nearby-copy">Explore the site to find an artifact.</small></div></div>
+          <button class="primary-button investigate-button" id="investigate-button" disabled>Investigate artifact <span>↗</span></button>
+          <div class="field-score"><span>ARCHIVE POINTS</span><strong id="score">000</strong></div>
+          <p class="field-tip">TIP: Visit every site. Your discoveries are saved automatically on this device.</p>
+        </aside>
+      </div>
+    </section>
 
-        <p class="archive-instructions">Choose a location. Examine its hardware, reconstruct the mission from the recovered clues, and restore the file by answering Mission Control's question.</p>
-        <div class="filter-row" role="group" aria-label="Travel to a destination">
-          <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All locations <span>04</span></button>
-          <button class="filter-button" type="button" data-filter="moon" aria-pressed="false">The Moon <span>01</span></button>
-          <button class="filter-button" type="button" data-filter="mars" aria-pressed="false">Mars <span>02</span></button>
-          <button class="filter-button" type="button" data-filter="deep-space" aria-pressed="false">Deep space <span>01</span></button>
-        </div>
+    <section id="archive-screen" class="screen content-screen hidden" aria-labelledby="archive-title">
+      <div class="section-heading"><p class="eyebrow">YOUR FIELD NOTES</p><h2 id="archive-title">Lost hardware archive</h2><p>Every artifact has a story. Revisit what you have found and track your expedition progress.</p></div>
+      <div class="archive-summary"><div><strong id="archive-count">0</strong><span> / 6 artifacts discovered</span></div><div class="archive-total"><span>ARCHIVE POINTS</span><b id="archive-score">000</b></div></div>
+      <div id="archive-grid" class="archive-grid"></div>
+      <button class="back-link" data-screen="map">← Continue exploring</button>
+    </section>
 
-        <p class="save-status" id="save-status" role="status"></p>
-        <div class="mission-grid" id="mission-grid" aria-live="polite"></div>
-        <section class="archive-complete" id="archive-complete" aria-labelledby="archive-complete-title" hidden>
-          <span class="complete-mark" aria-hidden="true">✦</span>
-          <div>
-            <p class="eyebrow">RECOVERY MISSION COMPLETE</p>
-            <h2 id="archive-complete-title">The NASA Lost Hardware Archive is restored.</h2>
-            <p>You recovered all four mission files and brought their stories—and the science they made possible—back into the record. The explorers may be far away, but what they taught us travels on.</p>
-          </div>
-          <a class="back-to-top" href="#explorers">REVISIT THE ARCHIVE <span aria-hidden="true">↑</span></a>
-        </section>
-      </section>
+    <section id="instructions-screen" class="screen content-screen hidden" aria-labelledby="instructions-title">
+      <div class="section-heading"><p class="eyebrow">FIELD MANUAL</p><h2 id="instructions-title">How to explore</h2><p>Look closely. The quietest places can tell the biggest stories.</p></div>
+      <div class="instruction-grid"><article><span>01</span><h3>Choose a site</h3><p>Travel to the Moon, Mars, or deep space from the destination map.</p></article><article><span>02</span><h3>Follow the signal</h3><p>Move with WASD or the arrow keys. Walk close to a glowing marker to identify an artifact.</p></article><article><span>03</span><h3>Log the history</h3><p>Press E or use the investigate button to read the mission record and answer a short question.</p></article></div>
+      <div class="controls-note"><b>CONTROLS</b><span><kbd>W A S D</kbd> or <kbd>↑ ↓ ← →</kbd> move</span><span><kbd>E</kbd> investigate nearby</span><span><kbd>ESC</kbd> pause / resume</span></div>
+      <button class="primary-button" id="manual-start">Ready to explore <span>↗</span></button>
+    </section>
+  </main>
 
-      <section class="about-section" id="about" aria-labelledby="about-title">
-        <div class="about-symbol" aria-hidden="true">✳</div>
-        <div>
-          <p class="eyebrow">ARCHIVE BRIEF</p>
-          <h2 id="about-title">Every clue is part of a real mission.</h2>
-          <p>The explorer's voice is an imaginative storytelling device; mission details and science are grounded in NASA records. Use the source links to investigate further. Some hardware is silent, while some spacecraft are still traveling—mission status can change.</p>
-        </div>
-        <a class="back-to-top" href="#page-title">BACK TO THE STARS <span aria-hidden="true">↑</span></a>
-      </section>
-    </main>
+  <footer><span>AN EDUCATIONAL SPACE ARCHAEOLOGY GAME</span><span>Built for curious explorers <b>✦</b></span></footer>
 
-    <footer class="site-footer">
-      <span>NASA LOST HARDWARE ARCHIVE</span>
-      <span>RECOVERY FILES 01–04 <span aria-hidden="true">✦</span></span>
-    </footer>
-    <noscript><p class="noscript-message">Turn on JavaScript to explore the missions and play the quizzes.</p></noscript>
-  </body>
+  <div id="artifact-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="artifact-title"><div class="modal-card"><button class="modal-close" data-close-modal aria-label="Close">×</button><p class="eyebrow" id="modal-kicker">ARCHIVE ENTRY / NEW DISCOVERY</p><div class="modal-art" id="modal-art" aria-hidden="true">✦</div><div class="modal-content"><h2 id="artifact-title"></h2><p class="modal-mission" id="artifact-mission"></p><div class="artifact-facts"><div><small>MISSION ERA</small><b id="artifact-era"></b></div><div><small>STATUS</small><b id="artifact-status"></b></div></div><h3>Why it matters</h3><p id="artifact-story"></p><p class="artifact-discovery"><b>SCIENTIFIC LEGACY</b><br><span id="artifact-discovery-text"></span></p><div id="quiz-area" class="quiz-area"><p class="quiz-question" id="quiz-question"></p><div id="quiz-options" class="quiz-options"></div><p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p></div><button id="artifact-done" class="primary-button modal-done">Continue exploring <span>→</span></button></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
 </html>

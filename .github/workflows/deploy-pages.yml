@@ -23,7 +23,7 @@ jobs:
       - name: Prepare website files
         run: |
           mkdir dist
-          cp index.html game.js styles.css dist/
+          cp index.html game.js style.css dist/
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload website
